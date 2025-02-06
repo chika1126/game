@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリックゲーム</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('../game/2590360.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: メイリオ;
+
+
+        }
+        #game-container {
+            margin-top: 50px;
+        }
+        #score, #timer {
+            font-size: 70px;
+            margin: 20px;
+            font-family: メイリオ;
+            color:black;
+        }
+        #click-button {
+            font-size: 50px;
+            padding: 10px 20px;
+            background-color: darkgray;
+            font-family: メイリオ;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #click-button:hover {
+            background-color: rgb(210, 152, 240);
+        }
+        #click-button:disabled {
+            background-color: white;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>クリックしてスコアを増やそう！</h1>
+        <p id="timer">タイマー: 60秒</p>
+        <p id="score">スコア: 0</p>
+        <button id="click-button">クリック！</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 60;
+        const scoreDisplay = document.getElementById("score");
+        const timerDisplay = document.getElementById("timer");
+        const button = document.getElementById("click-button");
+
+        button.addEventListener("click", function() {
+            score++;
+            scoreDisplay.innerText = "スコア: " + score;
+        });
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerDisplay.innerText = "タイマー: " + timeLeft + "秒";
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                button.disabled = true;
+                timerDisplay.innerText = "ゲーム終了！";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
